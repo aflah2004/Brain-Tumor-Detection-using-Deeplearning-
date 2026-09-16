@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Prediction</title>
+    <style>
+        body {
+            background: url("/static/IMG_6439.JPG") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        input, select {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 80%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Prediction</h1>
+        <form method="POST">
+            <input type="text" name="name" value="{{ prediction.name }}" required><br>
+            <input type="number" name="age" value="{{ prediction.age }}" required><br>
+            <select name="gender" required>
+                <option value="Male" {% if prediction.gender == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if prediction.gender == 'Female' %}selected{% endif %}>Female</option>
+                <option value="Other" {% if prediction.gender == 'Other' %}selected{% endif %}>Other</option>
+            </select><br>
+            <input type="text" name="contact" value="{{ prediction.contact }}" required><br>
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</body>
+</html>

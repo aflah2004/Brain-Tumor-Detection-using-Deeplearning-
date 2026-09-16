@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result - Brain Tumor Detection</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #4c6ddb, #9DCEFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgb(162, 171, 184);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+        h1 {
+            color: #2b2d42;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .result {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .pressure {
+            font-size: 1.1em;
+            color: #5f5f5f;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #080707;
+            color: rgb(218, 222, 225);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #e9eaf5;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Brain Tumor Detection Result</h1>
+
+        {% if result %}
+            {% if img_url %}
+                <img src="{{ img_url }}" alt="Uploaded Brain MRI">
+            {% endif %}
+            <div class="result">Result: {{ result }}</div>
+            <div class="pressure">Estimated Pressure Value: <strong>{{ pressure }} mmHg</strong></div>
+            <a class="btn" href="{{ url_for('patients') }}">View Patient History</a>
+            <a class="btn" href="{{ url_for('prevention') }}">AI Prevention Tips</a>
+            <a class="btn" href="{{ url_for('patient') }}">Add Another Patient</a>
+        {% else %}
+            <h3>Upload a Brain MRI Image for Detection</h3>
+            <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*" required>
+                <br><br>
+                <button class="btn" type="submit">Predict</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

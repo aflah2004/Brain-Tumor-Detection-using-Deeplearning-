@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Patient History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4c38b2, #66a6ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #004aad;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 1000px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #004aad;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        img {
+            width: 80px;
+            border-radius: 8px;
+            border: 2px solid #004aad;
+        }
+        a {
+            text-decoration: none;
+            color: #004aad;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button, .chatbot-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        .button {
+            background-color: #004aad;
+        }
+        .button:hover {
+            background-color: #00317a;
+        }
+        .chatbot-btn {
+            background-color: #4CAF50;
+        }
+        .chatbot-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patient History</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Pressure</th>
+            <th>Result</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.contact }}</td>
+            <td>{{ patient.email }}</td>
+            <td>{{ patient.pressure }}</td>
+            <td>{{ patient.result }}</td>
+            <td><img src="{{ url_for('static', filename=patient.image) }}" alt="Image"></td>
+            <td>
+                <a href="{{ url_for('edit', index=loop.index0) }}">Edit</a> |
+                <a href="{{ url_for('delete', index=loop.index0) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Add New Patient button -->
+    <a href="/" class="button">Add New Patient</a>
+</body>
+</html>

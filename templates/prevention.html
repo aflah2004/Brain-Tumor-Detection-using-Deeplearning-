@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Prevention Assistant</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a4b6f2, #96a1e8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      width: 450px;
+      height: 600px;
+      background-color: #87b4ea;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #4f46e5;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 10px 15px;
+      margin: 8px 0;
+      border-radius: 15px;
+      line-height: 1.4;
+      font-size: 15px;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: #8681e1;
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+
+    .ai-message {
+      align-self: flex-start;
+      background-color: #f1f0f0;
+      border-bottom-left-radius: 0;
+    }
+
+    .input-container {
+      display: flex;
+      border-top: 1px solid #5593df;
+      padding: 10px;
+      background-color: #719edd;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #648cba;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #918ced;
+      color: rgb(47, 113, 144);
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #344c94;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">🧠 AI Prevention Assistant</div>
+
+    <div class="chat-box" id="chatBox">
+      <div class="ai-message message">
+        Hello! 👋 I’m your AI Assistant.  
+        Tell me how you’re feeling or what you want to know — for example, type “stress”, “diet”, or “screen time”.
+      </div>
+
+      {% if user_input %}
+        <div class="user-message message">{{ user_input }}</div>
+        {% for tip in suggestions %}
+          <div class="ai-message message">{{ tip }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <form method="POST" class="input-container">
+      <input type="text" name="user_input" placeholder="Type your message..." autocomplete="off" required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    // Auto-scroll chat to bottom
+    const chatBox = document.getElementById('chatBox');
+    chatBox.scrollTop = chatBox.scrollHeight;
+  </script>
+</body>
+</html>

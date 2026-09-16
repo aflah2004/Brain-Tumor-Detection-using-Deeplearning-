@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 20px;
+            background-color: #5276eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #541ad2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome {{ name }}</h1>
+    <p>Age: {{ age }}</p>
+    <p>Gender: {{ gender }}</p>
+    <p>Contact: {{ contact }}</p>
+
+    <a class="btn" href="{{ url_for('patients') }}">View All Patients</a>
+    <a class="btn" href="{{ url_for('prevention') }}">Prevention Tips</a>
+</body>
+</html>
